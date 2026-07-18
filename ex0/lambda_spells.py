@@ -1,20 +1,20 @@
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
-    """Sorts a list of artifacts by their power in descending order."""
+    """Sort artifact list by power in descending order."""
     return sorted(artifacts, key=lambda a: a['power'], reverse=True)
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
-    """Filters a list of mages by their power."""
+    """Filter a list of mages by their power."""
     return list(filter(lambda m: m['power'] >= min_power, mages))
 
 
 def spell_transformer(spells: list[str]) -> list[str]:
-    """Transforms a list of spells by adding asterisks around each spell."""
+    """Transform a list of spells by adding asterisks around each spell."""
     return list(map(lambda s: f"* {s} *", spells))
 
 
 def mage_stats(mages: list[dict]) -> dict:
-    """Calculates max power, min power and average (int, int, float)."""
+    """Calculate max power, min power and average (int, int, float)."""
     return {
         'max_power': int(max(mages, key=lambda m: m['power'])['power']),
         'min_power': int(min(mages, key=lambda m: m['power'])['power']),
@@ -39,3 +39,21 @@ if __name__ == "__main__":
     spells = ["fireball", "heal", "shield"]
     print("\nTesting spell transformer...")
     print(" ".join(spell_transformer(spells)))
+
+    mages = [
+        {'name': 'Merlin', 'power': 95},
+        {'name': 'Gandalf', 'power': 88},
+        {'name': 'Radagast', 'power': 72},
+    ]
+    print("\nTesting power filter (min_power=80)...")
+    over_80 = power_filter(mages, 80)
+    for m in over_80:
+        print(f"{m['name']} ({m['power']} power)")
+
+    print("\nTesting mage stats...")
+    stats = mage_stats(mages)
+    print(
+        f"max_power: {stats['max_power']}, "
+        f"min_power: {stats['min_power']}, "
+        f"avg_power: {stats['avg_power']}"
+    )
