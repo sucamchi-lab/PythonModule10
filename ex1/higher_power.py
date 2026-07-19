@@ -1,3 +1,19 @@
+"""
+This exercise focuses on higher-order functions.
+Higher-order functions can take other functions as arguments,
+or return functions as their result.
+
+Functions are first-class citizens in Python,
+meaning they can be passed around and used as values.
+Higher-order functions allow for more flexible code,
+enabling the creation of powerful and reusable components.
+
+We use Callable type to indicate the argument or return type is a function.
+Other variables like int or str are not callable.
+callable() is a built-in function
+that returns True if the object appears callable, False otherwise.
+"""
+
 from collections.abc import Callable
 
 

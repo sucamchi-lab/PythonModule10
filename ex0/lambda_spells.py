@@ -1,5 +1,13 @@
+"""
+This exercise focuses on using lambda functions.
+Lambda functions are anonymous functions that make code more concise.
+They are ideal for simple, one-off operations
+that can be defined in a single line.
+"""
+
+
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
-    """Sort artifact list by power in descending order."""
+    """Sort artifacts by power in descending order."""
     return sorted(artifacts, key=lambda a: a['power'], reverse=True)
 
 
