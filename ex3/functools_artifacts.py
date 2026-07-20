@@ -100,6 +100,16 @@ if __name__ == "__main__":
     except ValueError as e:
         print(e)
 
+    print("\nTesting partial enchanter...")
+
+    def base_enchantment(power: int, element: str, target: str) -> str:
+        return f"Cast {element} spell at {target} with power {power}"
+
+    enchanters = partial_enchanter(base_enchantment)
+    print(enchanters['fire'](target="goblin"))
+    print(enchanters['ice'](target="dragon"))
+    print(enchanters['dark'](target="wizard"))
+
     print("\nTesting memoized fibonacci...")
     print(f"Fib(0): {memoized_fibonacci(0)}")
     print(f"Fib(1): {memoized_fibonacci(1)}")
