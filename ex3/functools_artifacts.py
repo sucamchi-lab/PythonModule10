@@ -42,7 +42,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     if not spells:
         return 0
     if operation not in ops:
-        return 0
+        raise ValueError(f"Unknown operation: {operation}")
     return functools.reduce(ops[operation], spells)
 
 
@@ -89,21 +89,26 @@ def spell_dispatcher() -> Callable[[Any], str]:
 
 if __name__ == "__main__":
     spells = [10, 20, 30, 40]
+    try:
+        print("\nTesting spell reducer...")
+        print(f"Sum: {spell_reducer(spells, 'add')}")
+        print(f"Product: {spell_reducer(spells, 'multiply')}")
+        print(f"Max: {spell_reducer(spells, 'max')}")
+        print(f"Min: {spell_reducer(spells, 'min')}")
+        print(f"Invalid operation: {spell_reducer(spells, 'invalid')}")
 
-    print("Testing spell reducer...")
-    print(f"Sum: {spell_reducer(spells, 'add')}")
-    print(f"Product: {spell_reducer(spells, 'multiply')}")
-    print(f"Max: {spell_reducer(spells, 'max')}")
+    except ValueError as e:
+        print(e)
 
-    print("Testing memoized fibonacci...")
+    print("\nTesting memoized fibonacci...")
     print(f"Fib(0): {memoized_fibonacci(0)}")
     print(f"Fib(1): {memoized_fibonacci(1)}")
     print(f"Fib(10): {memoized_fibonacci(10)}")
     print(f"Fib(15): {memoized_fibonacci(15)}")
 
-    print("Testing spell dispatcher...")
+    print("\nTesting spell dispatcher...")
     dispatch = spell_dispatcher()
     print(dispatch(42))
     print(dispatch("fireball"))
     print(dispatch(["fire", "ice", "dark"]))
-    print(dispatch(3.14))
+    print(dispatch(3.14))  # Unknown spell type
