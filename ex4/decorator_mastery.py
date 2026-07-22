@@ -1,12 +1,10 @@
 """
-This exercise focuses on mastering decorators.
+This exercise focuses on decorators.
 
 Decorators are a design pattern in Python that adds new
 functionality to an existing object without modifying its structure.
-Decorators work by wrapping a function, method, or class with another function
-that can add more logic or modify its behavior.
-Each decorator handles one specific responsibility,
-keeping functions focused on their primary purpose.
+Decorators enable separation of concerns by allowing you to wrap a function
+with additional behavior without changing the function's code.
 
 The difference between @staticmethod and regular instance methods:
 
@@ -20,9 +18,9 @@ The difference between @staticmethod and regular instance methods:
   for utility functions that are related to the class but
   don't need access to instance or class data.
 
-  Args and kwargs are used to pass a variable number of arguments to a
-  function without explicitly defining them,
-  similar to (int argc, char ** argv) in C.
+Args and kwargs are used to pass a variable number of arguments to a
+function without explicitly defining them,
+similar to (int argc, char ** argv) in C.
 """
 
 from collections.abc import Callable
@@ -44,7 +42,7 @@ def spell_timer(func: Callable) -> Callable:
 
 
 def power_validator(min_power: int) -> Callable:
-    """Decorator factory that validates power levels.
+    """Decorator that validates power levels.
     If the 'power' argument is below min_power, the spell is not cast
     and an error message is returned instead.
     """

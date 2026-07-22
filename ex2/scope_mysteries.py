@@ -4,7 +4,7 @@ Scope refers to the region of a program where a variable is accessible.
 Understanding scope is crucial for writing clean and maintainable code,
 as it helps prevent naming conflicts and unintended side effects.
 
-We use nonlocal to indicate that a variableis defined in an ENCLOSING
+We use nonlocal to indicate that a variable is defined in an ENCLOSING
 function's scope, without using a global variable.
 
 Closures help to capture and remember the values of variables

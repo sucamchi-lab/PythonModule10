@@ -20,12 +20,12 @@ previously computed results.
 This improves the performance for recursive functions like
 Fibonacci by reducing time complexity from exponential to linear.
 
-functools.singledispatch transforms a function into ageneric function,
-allowing different behavior based on the type ofthe first argument.
+functools.singledispatch transforms a function into a generic function.
 This is Python's approach to function overloading,
 allowing different behaviour for different input types
-(int, str, list, etc.) without needing to write multiple functions,
-similar to how abstract base classes work.
+(int, str, list, etc.) without needing to write multiple functions
+with different names. It is a form of polymorphism,
+similar to how abstract base classes work in Module 05.
 """
 
 from collections.abc import Callable
