@@ -17,8 +17,12 @@ The difference between @staticmethod and regular instance methods:
 - A @staticmethod does NOT receive `self`. It behaves like a
   regular function that happens to live in the class namespace. It
   cannot access instance or class state directly. Use @staticmethod
-  for utility functions that are logically related to the class but
-  don't need access to instance data.
+  for utility functions that are related to the class but
+  don't need access to instance or class data.
+
+  Args and kwargs are used to pass a variable number of arguments to a
+  function without explicitly defining them,
+  similar to (int argc, char ** argv) in C.
 """
 
 from collections.abc import Callable
@@ -33,8 +37,8 @@ def spell_timer(func: Callable) -> Callable:
         print(f"Casting {func.__name__}...")
         start = time()
         result = func(*args, **kwargs)
-        elapsed = time() - start
-        print(f"Spell completed in {elapsed:.3f} seconds")
+        end = time() - start
+        print(f"Spell completed in {end:.3f} seconds")
         return result
     return wrapper
 
@@ -50,7 +54,7 @@ def power_validator(min_power: int) -> Callable:
             if 'power' in kwargs:
                 pwr = kwargs['power']
             else:
-                pwr = args[-1]  # Assume power is the last positional argument
+                pwr = args[-1]  # Assumes power is the last positional argument
             if pwr < min_power:
                 return "Insufficient power for this spell"
             return func(*args, **kwargs)
@@ -80,7 +84,11 @@ def retry_spell(max_attempts: int) -> Callable:
 
 
 class MageGuild:
-    """A guild of mages with static and instance methods."""
+    """A class that uses static methods and instance methods.
+    Here, we demonstrate how static methods don't require self and
+    can be called on the class itself,while instance methods
+    operate on specific instances of the class.
+    """
 
     @staticmethod
     def validate_mage_name(name: str) -> bool:
@@ -91,7 +99,10 @@ class MageGuild:
 
     @power_validator(min_power=10)
     def cast_spell(self, spell_name: str, power: int) -> str:
-        """Cast a spell with the given name and power level."""
+        """Cast a spell with the given name and power level.
+        This function calls the previously defined power_validator
+        decorator to ensure that the power level is sufficient
+        before casting the spell."""
         return f"Successfully cast {spell_name} with {power} power"
 
 

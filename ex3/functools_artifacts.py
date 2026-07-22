@@ -5,8 +5,7 @@ functions and tools for working with callable objects.
 
 functools.reduce applies a binary function cumulatively to the items
 of an iterable, reducing the sequence to a single value. This enables
-powerful data aggregation on lists or dictionaries
-without writing explicit loops.
+data aggregation on lists or dictionaries without writing explicit loops.
 
 functools.partial creates a new function by pre-filling some arguments
 of an existing function. This is useful for creating specialized
@@ -14,16 +13,19 @@ versions of general-purpose functions, reducing boilerplate and
 making code more declarative.
 
 functools.lru_cache is a decorator that memoizes function results using
-a Least Recently Used (LRU) cache. Memoization avoids recomputing
-expensive function calls by storing previously computed results.
-This improves the performance for recursive functions like
-Fibonacci, reducing the time complexity from O(2^n) to O(n).
+a Least Recently Used (LRU) cache.
 
-functools.singledispatch transforms a function into a single-dispatch
-generic function, allowing different behavior based on the type of
-the first argument. This is Python's approach to function overloading,
+Memoization avoids recomputing function calls by storing
+previously computed results.
+This improves the performance for recursive functions like
+Fibonacci by reducing time complexity from exponential to linear.
+
+functools.singledispatch transforms a function into ageneric function,
+allowing different behavior based on the type ofthe first argument.
+This is Python's approach to function overloading,
 allowing different behaviour for different input types
-(int, str, list, etc.) without needing to write multiple functions.
+(int, str, list, etc.) without needing to write multiple functions,
+similar to how abstract base classes work.
 """
 
 from collections.abc import Callable
@@ -67,7 +69,7 @@ def memoized_fibonacci(n: int) -> int:
 
 
 def spell_dispatcher() -> Callable[[Any], str]:
-    """Return a singledispatch-based dispatcher for different spell types."""
+    """Return a dispatcher for different spell types."""
     @functools.singledispatch
     def dispatch(spell: Any) -> str:
         return "Unknown spell type"
