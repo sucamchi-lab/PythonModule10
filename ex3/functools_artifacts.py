@@ -16,13 +16,14 @@ making code more declarative.
 functools.lru_cache is a decorator that memoizes function results using
 a Least Recently Used (LRU) cache. Memoization avoids recomputing
 expensive function calls by storing previously computed results.
-This dramatically improves performance for recursive functions like
+This improves the performance for recursive functions like
 Fibonacci, reducing the time complexity from O(2^n) to O(n).
 
 functools.singledispatch transforms a function into a single-dispatch
 generic function, allowing different behavior based on the type of
 the first argument. This is Python's approach to function overloading,
-enabling clean, type-based dispatch without complex if-else chains.
+allowing different behaviour for different input types
+(int, str, list, etc.) without needing to write multiple functions.
 """
 
 from collections.abc import Callable
@@ -48,7 +49,6 @@ def spell_reducer(spells: list[int], operation: str) -> int:
 
 def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
     """Return a dictionary of partially applied enchantment functions.
-
     Each version pre-fills power=50 and the respective element.
     """
     return {

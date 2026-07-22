@@ -23,11 +23,11 @@ def spell_transformer(spells: list[str]) -> list[str]:
 
 def mage_stats(mages: list[dict]) -> dict:
     """Calculate max power, min power and average (int, int, float)."""
-    return {
-        'max_power': int(max(mages, key=lambda m: m['power'])['power']),
-        'min_power': int(min(mages, key=lambda m: m['power'])['power']),
-        'avg_power': round(sum(m['power'] for m in mages) / len(mages), 2)
-    }
+    return (lambda pow: {
+        'max_power': max(pow),
+        'min_power': min(pow),
+        'avg_power': float(sum(pow) / len(pow))
+    })([m['power'] for m in mages])
 
 
 if __name__ == "__main__":
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         {'name': 'Shadow Blade', 'power': 78, 'type': 'stealth'},
     ]
     sorted_artifacts = artifact_sorter(artifacts)
-    print("Testing artifact sorter...")
+    print("\nTesting artifact sorter...")
     print(
         f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']} power)"
         f" comes before"
