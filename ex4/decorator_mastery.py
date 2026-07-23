@@ -26,12 +26,13 @@ similar to (int argc, char ** argv) in C.
 from collections.abc import Callable
 from functools import wraps
 from time import sleep, time
+from typing import Any
 
 
 def spell_timer(func: Callable) -> Callable:
     """Decorator that measures and prints function execution time."""
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         print(f"Casting {func.__name__}...")
         start = time()
         result = func(*args, **kwargs)
@@ -48,7 +49,7 @@ def power_validator(min_power: int) -> Callable:
     """
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             if 'power' in kwargs:
                 pwr = kwargs['power']
             else:
@@ -64,7 +65,7 @@ def retry_spell(max_attempts: int) -> Callable:
     """Decorator that retries failed spells up to max_attempts."""
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             for attempt in range(1, max_attempts + 1):
                 try:
                     return func(*args, **kwargs)
